@@ -1,5 +1,5 @@
 class Negociacoes {
-	constructor(armadilha) {
+	constructor() {
 		this._negociacoes = [];
 		Object.freeze(this);
 	}
