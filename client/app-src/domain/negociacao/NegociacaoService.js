@@ -1,3 +1,4 @@
+import { ApplicationException } from "../../util/ApplicationException.js";
 import { HttpService } from "../../util/HttpService.js";
 import { Negociacao } from "./Negociacao.js";
 
@@ -48,19 +49,19 @@ export class NegociacaoService {
 			)
 	}
 
-	obtemNegociacoesDoPeriodo() {
-		return Promise.all([
-			this.obtemNegociacoesDaSemana(),
-			this.obtemNegociacoesDaSemanaAnterior(),
-			this.obtemNegociacoesDaSemanaRetrasada()
-		])
-		.then(periodo => periodo
+	async obtemNegociacoesDoPeriodo() {
+		try {
+			let periodo = await Promise.all([
+				this.obtemNegociacoesDaSemana(),
+				this.obtemNegociacoesDaSemanaAnterior(),
+				this.obtemNegociacoesDaSemanaRetrasada()
+			]);
+			periodo
 				.reduce((novoArray, item) => novoArray.concat(item), [])
-				.sort((a, b) => b.data.getTime() - a.data.getTime())
-		)
-		.catch(err => {
+				.sort((a, b) => b.data.getTime() - a.data.getTime());
+		} catch (err) {
 			console.log(err);
-			throw new Error("Não foi possível obter as negociações do período");
-		});
+			throw new ApplicationException("Não foi possível obter as negociações do período");
+		}
 	}
 }

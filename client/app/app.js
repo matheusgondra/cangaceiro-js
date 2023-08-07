@@ -1,20 +1,25 @@
-System.register(["./controllers/NegociacaoController.js"], function (_export, _context) {
-  "use strict";
+System.register(["./controllers/NegociacaoController.js", "./util/index.js"], function (_export, _context) {
+	"use strict";
 
-  var NegociacaoController;
-  return {
-    setters: [function (_controllersNegociacaoControllerJs) {
-      NegociacaoController = _controllersNegociacaoControllerJs.NegociacaoController;
-    }],
-    execute: function () {
+	var NegociacaoController, debounce;
+	return {
+		setters: [function (_controllersNegociacaoControllerJs) {
+			NegociacaoController = _controllersNegociacaoControllerJs.NegociacaoController;
+		}, function (_utilIndexJs) {
+			debounce = _utilIndexJs.debounce;
+		}],
+		execute: function () {
 
-      const controller = new NegociacaoController();
-      const $ = document.querySelector.bind(document);
+			const controller = new NegociacaoController();
+			const $ = document.querySelector.bind(document);
 
-      $(".form").addEventListener("submit", controller.adiciona.bind(controller));
-      $("#botao-apaga").addEventListener("click", controller.apaga.bind(controller));
-      $("#botao-importa").addEventListener("click", controller.importaNegociacoes.bind(controller));
-    }
-  };
+			$(".form").addEventListener("submit", controller.adiciona.bind(controller));
+			$("#botao-apaga").addEventListener("click", controller.apaga.bind(controller));
+			$("#botao-importa").addEventListener("click", debounce(() => {
+				console.log("EXECUTOU A OPERAÇÃO DO DEBOUNCE");
+				controller.importaNegociacoes.bind(controller);
+			}, 1000));
+		}
+	};
 });
 //# sourceMappingURL=app.js.map
