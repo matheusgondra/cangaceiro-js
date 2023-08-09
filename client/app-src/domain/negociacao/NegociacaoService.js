@@ -1,6 +1,6 @@
-import { ApplicationException } from "../../util/ApplicationException.js";
 import { HttpService } from "../../util/HttpService.js";
 import { Negociacao } from "./Negociacao.js";
+import { ApplicationException } from "../../util/ApplicationException.js";
 
 export class NegociacaoService {
 	constructor() {
@@ -56,7 +56,7 @@ export class NegociacaoService {
 				this.obtemNegociacoesDaSemanaAnterior(),
 				this.obtemNegociacoesDaSemanaRetrasada()
 			]);
-			periodo
+			return periodo
 				.reduce((novoArray, item) => novoArray.concat(item), [])
 				.sort((a, b) => b.data.getTime() - a.data.getTime());
 		} catch (err) {

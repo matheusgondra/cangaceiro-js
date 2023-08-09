@@ -4,27 +4,19 @@ System.register([], function (_export, _context) {
 	return {
 		setters: [],
 		execute: function () {
-			class HttpService {
-				get(url) {
-					return new Promise((resolve, reject) => {
-						const xhr = new XMLHttpRequest();
-						xhr.open("GET", url);
+			let HttpService = class HttpService {
+				_handleErrors(res) {
+					if (!res.ok) {
+						throw new Error(res.statusText);
+					}
 
-						xhr.onreadystatechange = () => {
-							if (xhr.readyState == 4) {
-								if (xhr.status == 200) {
-									resolve(JSON.parse(xhr.responseText));
-								} else {
-									console.log(xhr.responseText);
-									reject(xhr.responseText);
-								}
-							}
-						};
-
-						xhr.send();
-					});
+					return res;
 				}
-			}
+
+				get(url) {
+					return fetch(url).then(res => this._handleErrors(res)).then(res => res.json());
+				}
+			};
 
 			_export("HttpService", HttpService);
 		}
