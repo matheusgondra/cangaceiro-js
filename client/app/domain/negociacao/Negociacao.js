@@ -1,10 +1,10 @@
-System.register(["../../util"], function (_export, _context) {
+System.register(["../../util/index.js"], function (_export, _context) {
 	"use strict";
 
 	var obrigatorio;
 	return {
-		setters: [function (_util) {
-			obrigatorio = _util.obrigatorio;
+		setters: [function (_utilIndexJs) {
+			obrigatorio = _utilIndexJs.obrigatorio;
 		}],
 		execute: function () {
 			let Negociacao = class Negociacao {

@@ -1,4 +1,4 @@
-System.register(["../Obrigatorio"], function (_export, _context) {
+System.register(["../../util/index.js"], function (_export, _context) {
 	"use strict";
 
 	var obrigatorio;
@@ -13,8 +13,8 @@ System.register(["../Obrigatorio"], function (_export, _context) {
 	_export("bindEvent", bindEvent);
 
 	return {
-		setters: [function (_Obrigatorio) {
-			obrigatorio = _Obrigatorio.obrigatorio;
+		setters: [function (_utilIndexJs) {
+			obrigatorio = _utilIndexJs.obrigatorio;
 		}],
 		execute: function () {}
 	};

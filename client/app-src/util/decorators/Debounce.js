@@ -5,10 +5,7 @@ export function debounce(milisegundos = 500) {
 		let timer = 0;
 		
 		descriptor.value = function(...args) {
-			if(event) {
-				event.preventDefault();
-			}
-			
+			if(event) event.preventDefault();			
 			clearTimeout(timer);
 			timer = setTimeout(() => metodoOriginal.apply(this, args), milisegundos);
 		}

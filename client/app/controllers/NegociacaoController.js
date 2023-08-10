@@ -82,9 +82,8 @@ System.register(["../domain/index.js", "../ui/index.js", "../util/index.js"], fu
 			var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _desc, _value, _class2;
 
 			let NegociacaoController = (_dec = controller("#data", "#quantidade", "#valor"), _dec2 = bindEvent("submit", ".form"), _dec3 = debounce(), _dec4 = bindEvent("click", "#botao-apaga"), _dec5 = bindEvent("click", "#botao-importa"), _dec6 = debounce(), _dec(_class = (_class2 = class NegociacaoController {
-				constructor(inputData, inputQuantidade, inputValor) {
-					const $ = document.querySelector.bind(document);
-					Object.assign(this, { inputData, inputQuantidade, inputValor });
+				constructor(_inputData, _inputQuantidade, _inputValor) {
+					Object.assign(this, { _inputData, _inputQuantidade, _inputValor });
 					this._negociacoes = new Bind(new Negociacoes(), new NegociacoesView("#negociacoes"), "adiciona", "esvazia");
 					this._mensagem = new Bind(new Mensagem(), new MensagemView("#mensagemView"), "texto");
 					this._service = new NegociacaoService();
@@ -112,9 +111,7 @@ System.register(["../domain/index.js", "../ui/index.js", "../util/index.js"], fu
 
 					return _asyncToGenerator(function* () {
 						try {
-							event.preventDefault();
 							const negociacao = _this2._criaNegociacao();
-
 							const dao = yield getNegociacaoDao();
 							yield dao.adiciona(negociacao);
 							_this2._negociacoes.adiciona(negociacao);

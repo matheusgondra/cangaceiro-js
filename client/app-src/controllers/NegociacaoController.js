@@ -4,9 +4,8 @@ import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bind
 
 @controller("#data", "#quantidade", "#valor")
 export class NegociacaoController {
-	constructor(inputData, inputQuantidade, inputValor) {
-		const $ = document.querySelector.bind(document);
-		Object.assign(this, { inputData, inputQuantidade, inputValor });
+	constructor(_inputData, _inputQuantidade, _inputValor) {
+		Object.assign(this, { _inputData, _inputQuantidade, _inputValor });
 		this._negociacoes = new Bind(
 			new Negociacoes(),
 			new NegociacoesView("#negociacoes"),
@@ -35,9 +34,7 @@ export class NegociacaoController {
 	@debounce()
 	async adiciona(event) {
 		try {
-			event.preventDefault();
 			const negociacao = this._criaNegociacao();
-			
 			const dao = await getNegociacaoDao();
 			await dao.adiciona(negociacao);
 			this._negociacoes.adiciona(negociacao);

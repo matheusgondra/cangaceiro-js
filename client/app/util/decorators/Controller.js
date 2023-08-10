@@ -8,12 +8,12 @@ System.register([], function (_export, _context) {
 			const constructorOriginal = constructor;
 
 			const constructorNovo = function () {
-				const instancia = new constructorOriginal(...elements);
+				const instance = new constructorOriginal(...elements);
 				Object.getOwnPropertyNames(constructorOriginal.prototype).forEach(property => {
-					if (Reflect.hasMetadata("bindEvent", instancia, property)) {}
+					if (Reflect.hasMetadata("bindEvent", instance, property)) {
+						associaEvento(instance, Reflect.getMetadata("bindEvent", instance, property));
+					}
 				});
-
-				return new constructorOriginal(...elements);
 			};
 
 			constructorNovo.prototype = constructorOriginal.prototype;
@@ -23,6 +23,12 @@ System.register([], function (_export, _context) {
 
 	_export("controller", controller);
 
+	function associaEvento(instance, metadado) {
+		document.querySelector(metadado.selector).addEventListener(metadado.event, event => {
+			if (metadado.prevent) event.preventDefault();
+			instance[metadado.propertyKey](event);
+		});
+	}
 	return {
 		setters: [],
 		execute: function () {}
