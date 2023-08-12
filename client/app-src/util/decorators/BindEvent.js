@@ -1,4 +1,4 @@
-import { obrigatorio } from "../../util/index.js";
+import { obrigatorio } from "../../util";
 
 export function bindEvent(
 	event = obrigatorio("event"),
@@ -6,7 +6,7 @@ export function bindEvent(
 	prevent = true
 ) {
 	return function(target, propertyKey, descriptor) {
-		Reflect.metadata(
+		Reflect.defineMetadata(
 			"bindEvent",
 			{ event, selector, prevent, propertyKey },
 			Object.getPrototypeOf(target),

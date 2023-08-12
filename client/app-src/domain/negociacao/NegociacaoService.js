@@ -1,6 +1,6 @@
-import { HttpService } from "../../util/HttpService.js";
-import { Negociacao } from "./Negociacao.js";
-import { ApplicationException } from "../../util/ApplicationException.js";
+import { HttpService } from "../../util/HttpService";
+import { Negociacao } from "./Negociacao";
+import { ApplicationException } from "../../util/ApplicationException";
 
 export class NegociacaoService {
 	constructor() {
@@ -9,7 +9,7 @@ export class NegociacaoService {
 
 	obtemNegociacoesDaSemana() {
 		return this._http
-			.get("http://localhost:3000/negociacoes/semana")
+			.get(`${SERVICE_URL}/negociacoes/semana`)
 			.then(
 				dados => {
 					const negociacoes = dados.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
@@ -23,7 +23,7 @@ export class NegociacaoService {
 
 	obtemNegociacoesDaSemanaAnterior() {
 		return this._http
-			.get("http://localhost:3000/negociacoes/anterior")
+			.get(`${SERVICE_URL}/negociacoes/anterior`)
 			.then(
 				dados => {
 					const negociacoes = dados.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
@@ -37,7 +37,7 @@ export class NegociacaoService {
 
 	obtemNegociacoesDaSemanaRetrasada() {
 		return this._http
-			.get("http://localhost:3000/negociacoes/retrasada")
+			.get(`${SERVICE_URL}/negociacoes/retrasada`)
 			.then(
 				dados => {
 					const negociacoes = dados.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));

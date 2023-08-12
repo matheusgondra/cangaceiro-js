@@ -9,9 +9,7 @@ export class ConnectionFactory {
 
 	static getConnection() {
 		return new Promise((resolve, reject) => {
-			if (connection) {
-				return resolve(connection);
-			}
+			if (connection) return resolve(connection);
 
 			const openRequest = indexedDB.open("jscangaceiro", 2);
 

@@ -24,13 +24,9 @@ function associaEvento(instance, metadado) {
 	document
 		.querySelector(metadado.selector)
 		.addEventListener(metadado.event, event => {
-<<<<<<< HEAD
-			if(metadado.prevent) event.preventDefault();
-=======
 			if(metadado.prevent) {
 				event.preventDefault();
-			}
->>>>>>> b3fd83d650cb66f4e940e22807553db5eebdb536
+			};
 			instance[metadado.propertyKey](event);
 		});
 }
